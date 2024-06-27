@@ -1,3 +1,6 @@
+#ifndef ARRAY_UTILS_H
+#define ARRAY_UTILS_H
+
 #include "constants.h"
 #include <array>
 #include "types.h"
@@ -46,3 +49,5 @@ inline Double2DArray roll_and_return(Double2DArray arr, int length, int axis) {
     }
     return rolledArr;
 }
+
+#endif // ARRAY_UTILS_H

@@ -1,3 +1,6 @@
+#ifndef FMTIO_H
+#define FMTIO_H
+
 //If the output appears messy, change the encoding of this file to match your terminal's encoding.
 #include <iostream>
 #include <string>
@@ -17,10 +20,10 @@ void fmtprint(Double2DArray arr) {
     std::cout<<parameters + "Iteration: " + std::to_string(itr)<<std::endl;
     for (int i = 0; i < HEIGHT; ++i) {
         for (int j = 0; j < WIDTH; ++j) {
-            if (barrier[i][j] == true) fmtout("¨€", BLACK, WHITE_BG);
-            else if (arr[i][j] > 0.07) fmtout("¨€", RED, WHITE_BG);
-            else if (0.06 < arr[i][j] and arr[i][j] < 0.07) fmtout("¡ö", RED, WHITE_BG);
-            else if (0.05 < arr[i][j] and arr[i][j] < 0.06) fmtout("¡Ô", RED, WHITE_BG);
+            if (barrier[i][j] == true) fmtout("â–ˆ", BLACK, WHITE_BG);
+            else if (arr[i][j] > 0.07) fmtout("â–ˆ", RED, WHITE_BG);
+            else if (0.06 < arr[i][j] and arr[i][j] < 0.07) fmtout("â– ", RED, WHITE_BG);
+            else if (0.05 < arr[i][j] and arr[i][j] < 0.06) fmtout("â‰¡", RED, WHITE_BG);
             else if (0.04 < arr[i][j] and arr[i][j] < 0.05) fmtout("=", RED, WHITE_BG);
             else if (0.03 < arr[i][j] and arr[i][j] < 0.04) fmtout("+", RED, WHITE_BG);
             else if (0.02 < arr[i][j] and arr[i][j] < 0.03) fmtout("-", RED, WHITE_BG);
@@ -31,10 +34,10 @@ void fmtprint(Double2DArray arr) {
             else if (-0.03 < arr[i][j] and arr[i][j] < -0.02) fmtout("-", BLUE, WHITE_BG);
             else if (-0.04 < arr[i][j] and arr[i][j] < -0.03) fmtout("+", BLUE, WHITE_BG);
             else if (-0.05 < arr[i][j] and arr[i][j] < -0.04) fmtout("=", BLUE, WHITE_BG);
-            else if (-0.06 < arr[i][j] and arr[i][j] < -0.05) fmtout("¡Ô", BLUE, WHITE_BG);
-            else if (-0.07 < arr[i][j] and arr[i][j] < -0.06) fmtout("¡ö", BLUE, WHITE_BG);
-            else if (arr[i][j] < -0.07) fmtout("¨€", BLUE, WHITE_BG);
-            else fmtout("¨€", WHITE, WHITE_BG);
+            else if (-0.06 < arr[i][j] and arr[i][j] < -0.05) fmtout("â‰¡", BLUE, WHITE_BG);
+            else if (-0.07 < arr[i][j] and arr[i][j] < -0.06) fmtout("â– ", BLUE, WHITE_BG);
+            else if (arr[i][j] < -0.07) fmtout("â–ˆ", BLUE, WHITE_BG);
+            else fmtout("â–ˆ", WHITE, WHITE_BG);
         }
         std::cout<<std::endl;
     }
@@ -43,3 +46,5 @@ void fmtprint(Double2DArray arr) {
 void fmtout(std::string content, std::string color, std::string background_color) {
     std::cout << background_color << color << content << RESET << BLACK_BG;
 }
+
+#endif //FMTIO_H

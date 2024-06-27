@@ -1,3 +1,6 @@
+#ifndef COLORS_H
+#define COLORS_H
+
 // ANSI color definitions
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"      /* Black */
@@ -16,3 +19,5 @@
 #define MAGENTA_BG   "\033[45m"      /* Magenta */
 #define CYAN_BG      "\033[46m"      /* Cyan */
 #define WHITE_BG     "\033[47m"      /* White */
+
+#endif // COLORS_H

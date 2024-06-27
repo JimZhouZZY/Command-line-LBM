@@ -25,6 +25,8 @@ It is pretty easy to set this program up.
     
     First ensure that you can see the correct characters (█■≡) in **fmtio.h**. If you can see the characters, Change the encoding of **fmtio.h** to the encoding of your terminal, and then the issue should be resolved. Else, copy the characters above and replace the garbled characters in your **fmtio.h**, save your files with the encoding format used by your terminal.
 
+    For example, if the language of your terminal is Chinese, then you should change the encoding of **fmtio.h** from the original UTF-8 to GBK.
+
 * Why is it outputing so many ANSI escape codes?
 
     Windows command does not support ANSI escape codes very well. Please turn to Windows Terminal, Linux or MacOS.

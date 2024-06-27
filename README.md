@@ -35,6 +35,10 @@ It is pretty easy to set this program up.
 
     Ensure that your terminal window in wide enough so that the output won't split.
 
+## Preview Vieo
+
+https://github.com/JimZhouZZY/Command-line-LBM/assets/140597003/39d39191-f497-43c8-beb7-a3c82e9e93cc
+
 
 
 

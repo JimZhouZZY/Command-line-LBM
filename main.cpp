@@ -2,50 +2,15 @@
 #include <math.h>
 #include <array>
 #include <string>
-#include "colors.h"
 #include "array_utils.h"
-
-using Double2DArray = std::array<std::array<double, WIDTH>, HEIGHT>;
-using Boolean2DArray = std::array<std::array<bool, WIDTH>, HEIGHT>;
+#include "fmtio.h"
+#include "types.h"
 
 // Iterations
 int itr = 0;
 
-// Equation coefficient matrix, corresponding to: weight, ux, uy, u2, uxuy, ux2, uy2
-constexpr std::array<std::array<double, 7>, 9> c = {{
-    std::array<double, 7>{four9th, 0, 0, 0, 0, 0, 0},
-    std::array<double, 7>{one9th, 1, 0, 0, 0, 1, 0},
-    std::array<double, 7>{one36th, 1, 1, 1, 1, 0, 0},
-    std::array<double, 7>{one9th, 0, 1, 0, 0, 0, 1},
-    std::array<double, 7>{one36th, -1, 1, 1, -1, 0, 0},
-    std::array<double, 7>{one9th, -1, 0, 0, 0, 1, 0},
-    std::array<double, 7>{one36th, -1, -1, 1, 1, 0, 0},
-    std::array<double, 7>{one9th, 0, -1, 0, 0, 0, 1},
-    std::array<double, 7>{one36th, 1, -1, 1, -1, 0, 0}
-}};
-
-// Directions
-constexpr std::array<std::array<int, 2>, 9> dir = {{
-    std::array<int, 2>{0, 0},
-    std::array<int, 2>{0, 1},
-    std::array<int, 2>{-1, 1},
-    std::array<int, 2>{-1, 0},
-    std::array<int, 2>{-1, -1},
-    std::array<int, 2>{0, -1},
-    std::array<int, 2>{1, -1},
-    std::array<int, 2>{1, 0},
-    std::array<int, 2>{1, 1},
-}};
-
-// FLuid Parameters
-double viscosity = 0.020;
+// Omega
 double omega = 1 / (3 * viscosity + 0.5);
-double u0 = 0.15;
-
-// Construct a string showing parameters
-std::string parameters = "Grid Size: " + std::to_string(HEIGHT) + "x" + std::to_string(WIDTH) + "    " 
-                        + "u0: " + std::to_string(u0) + "    " 
-                        + "Viscosity: " + std::to_string(viscosity) + "    ";
 
 // Microscopic velocity. there are nine directions under the D2Q9 model
 /*
@@ -101,7 +66,7 @@ Double2DArray curl(Double2DArray ux, Double2DArray uy);
 int main() {
     init();
     for(int i = 0; i < MAX_ITR; ++i) {
-        if (itr % ITR_SHOW_GAP == 0) print();
+        if (itr % ITR_SHOW_GAP == 0) fmtprint(curl(ux, uy));
         stream();
         collide();
         itr++;
@@ -122,17 +87,6 @@ void init() {
     fill2DArray(n[6], one36th);
     fill2DArray(n[7], one9th);
     fill2DArray(n[8], one36th);
-    /*
-    int x = 50, y = 15;
-    n[1][y][x] = 100;
-    n[2][y][x] = 100;
-    n[3][y][x] = 100;
-    n[4][y][x] = 100;
-    n[5][y][x] = 100;
-    n[6][y][x] = 100;
-    n[7][y][x] = 100;
-    n[8][y][x] = 100;
-    */
     // Initialize barrier
     for (int i = 0; i < 16; ++i) {
         // This barrier is a 16px vertical line positioned at the right of the canvas
@@ -199,14 +153,11 @@ void collide() {
         }
     }
     for (int i = 0; i < HEIGHT; ++i) {
-        //n[0][i][0] = four9th * (1 - 1.5 * u0 * u0);
         n[1][i][0] = one9th * (1 + 3 * u0 + 4.5 * u0 * u0 - 1.5 * u0 * u0);
         n[2][i][0] = one36th * (1 + 3 * u0 + 4.5 * u0 * u0 - 1.5 * u0 * u0);
-        //n[3][i][0] = one9th * (1 - 1.5 * u0 * u0);
         n[4][i][0] = one36th * (1 - 3 * u0 + 4.5 * u0 * u0 - 1.5 * u0 * u0);
         n[5][i][0] = one9th * (1 - 3 * u0 + 4.5 * u0 * u0 - 1.5 * u0 * u0);
         n[6][i][0] = one36th * (1 - 3 * u0 + 4.5 * u0 * u0 - 1.5 * u0 * u0);
-        //n[7][i][0] = one9th * (1  - 1.5 * u0 * u0);
         n[8][i][0] = one36th * (1 + 3 * u0 + 4.5 * u0 * u0 - 1.5 * u0 * u0);
     }
 }
@@ -225,26 +176,6 @@ double feq(int k, int i, int j) {
             )
         )
     );
-}
-
-void print() {
-    std::cout<<"\033[2J\033[1;1H";
-    std::cout<<parameters + "Iteration: " + std::to_string(itr)<<std::endl;
-    Double2DArray value = curl(ux, uy); //curl(ux, uy);
-    for (int i = 0; i < HEIGHT; ++i) {
-        for (int j = 0; j < WIDTH; ++j) {
-            if (barrier[i][j] == true) out("¡ö", MAGENTA); //"¡ö"std::to_string(u2[i][j])
-            else if (value[i][j] > 0.01) out("¡ö", RED);
-            else if (value[i][j] < -0.01) out("¡ö", BLUE); //"¡õ"
-            else out("¡ö", WHITE);
-        }
-        std::cout<<std::endl;
-    }
-    //getchar();
-}
-
-void out(std::string content, std::string color) {
-    std::cout << color << content << RESET;
 }
 
 Double2DArray curl(Double2DArray ux, Double2DArray uy) {

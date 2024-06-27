@@ -1,8 +1,6 @@
 #include "constants.h"
 #include <array>
-
-using Double2DArray = std::array<std::array<double, WIDTH>, HEIGHT>;
-using Boolean2DArray = std::array<std::array<bool, WIDTH>, HEIGHT>;
+#include "types.h"
 
 // Fill a 2D array with given value
 inline void fill2DArray(Double2DArray& arr, double value){

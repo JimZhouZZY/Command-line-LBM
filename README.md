@@ -3,6 +3,9 @@ This repository contains a C++ program that utilizes the standard C++ library to
 
 The program is designed to plot results directly within the command-line interface using ANSI escape sequences. This feature ensures compatibility with tty environments, allowing for straightforward plotting.
 
+![showcase](https://github.com/JimZhouZZY/Command-line-LBM/assets/140597003/9e7727d8-d935-4c08-a2bc-f4a5f2031d54)
+
+
 ## How to set it up?
 
 It is pretty easy to set this program up.

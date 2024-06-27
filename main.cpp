@@ -228,7 +228,7 @@ double feq(int k, int i, int j) {
 }
 
 void print() {
-    system("cls");
+    std::cout<<"\033[2J\033[1;1H";
     std::cout<<parameters + "Iteration: " + std::to_string(itr)<<std::endl;
     Double2DArray value = curl(ux, uy); //curl(ux, uy);
     for (int i = 0; i < HEIGHT; ++i) {

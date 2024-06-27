@@ -3,26 +3,13 @@
 #include <array>
 #include <string>
 #include "colors.h"
-
-// Iterations
-constexpr int MAX_ITR = 100000000;
-constexpr int ITR_SHOW_GAP = 250;
-int itr = 0;
-
-// Grid Specifications
-constexpr int HEIGHT = 50;
-constexpr int WIDTH = 100;
+#include "array_utils.h"
 
 using Double2DArray = std::array<std::array<double, WIDTH>, HEIGHT>;
 using Boolean2DArray = std::array<std::array<bool, WIDTH>, HEIGHT>;
 
-// Mathematics Constants
-constexpr double PI = 3.14159265359;
-
-// Precalculate some commonly used values to speed up operations
-constexpr double one36th = 1.0 / 36.0;
-constexpr double four9th = 4.0 / 9.0;
-constexpr double one9th = 1.0 / 9.0;
+// Iterations
+int itr = 0;
 
 // Equation coefficient matrix, corresponding to: weight, ux, uy, u2, uxuy, ux2, uy2
 constexpr std::array<std::array<double, 7>, 9> c = {{
@@ -106,11 +93,9 @@ Boolean2DArray barrier = {};
 void init();
 void stream();
 void collide();
+double feq(int k, int i, int j);
 void print();
 void out(std::string content, std::string color);
-double feq(int k, int i, int j);
-void fill2DArray(Double2DArray& arr, double value);
-void roll(Double2DArray& arr, int length, int axis);
 Double2DArray curl(Double2DArray ux, Double2DArray uy);
 
 int main() {
@@ -260,51 +245,6 @@ void print() {
 
 void out(std::string content, std::string color) {
     std::cout << color << content << RESET;
-}
-
-// Fill a 2D array with given value
-void fill2DArray(Double2DArray& arr, double value){
-    for (int i = 0; i < HEIGHT; ++i) {
-        for (int j = 0; j < WIDTH; ++j) {
-            arr[i][j] = value;
-        }
-    }
-}
-
-void roll(Double2DArray& arr, int length, int axis) {
-    int shiftRows = length * (1 - axis);
-    int shiftCols = length * axis;
-    Double2DArray rolledArr = {};
-    for (int i = 0; i < HEIGHT; ++i) {
-        for (int j = 0; j < WIDTH; ++j) {
-            rolledArr[i][j] = arr[(i + shiftRows + HEIGHT) % HEIGHT][(j - shiftCols + WIDTH) % WIDTH];
-        }
-    }
-    arr = rolledArr;
-}
-
-void roll(Boolean2DArray& arr, int length, int axis) {
-    int shiftRows = length * (1 - axis);
-    int shiftCols = length * axis;
-    Boolean2DArray rolledArr = {};
-    for (int i = 0; i < HEIGHT; ++i) {
-        for (int j = 0; j < WIDTH; ++ j) {
-            rolledArr[i][j] = arr[(i + shiftRows + HEIGHT) % HEIGHT][(j - shiftCols + WIDTH) % WIDTH];
-        }
-    }
-    arr = rolledArr;
-}
-
-Double2DArray roll_and_return(Double2DArray arr, int length, int axis) {
-    int shiftRows = length * (1 - axis);
-    int shiftCols = length * axis;
-    Double2DArray rolledArr = {};
-    for (int i = 0; i < HEIGHT; ++i) {
-        for (int j = 0; j < WIDTH; ++ j) {
-            rolledArr[i][j] = arr[(i + shiftRows + HEIGHT) % HEIGHT][(j - shiftCols + WIDTH) % WIDTH];
-        }
-    }
-    return rolledArr;
 }
 
 Double2DArray curl(Double2DArray ux, Double2DArray uy) {

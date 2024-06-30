@@ -54,4 +54,7 @@ const std::string parameters = "Grid Size: " + std::to_string(HEIGHT) + "x" + st
                         + "u0: " + std::to_string(u0) + "    " 
                         + "Viscosity: " + std::to_string(viscosity) + "    ";
 
+// Contrast of the plot
+const double CONTRAST = 1.0;
+
 #endif // CONSTANTS_H

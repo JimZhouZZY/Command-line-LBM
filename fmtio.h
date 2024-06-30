@@ -21,22 +21,22 @@ void fmtprint(Double2DArray arr) {
     for (int i = 0; i < HEIGHT; ++i) {
         for (int j = 0; j < WIDTH; ++j) {
             if (barrier[i][j] == true) fmtout("█", BLACK, WHITE_BG);
-            else if (arr[i][j] > 0.07) fmtout("█", RED, WHITE_BG);
-            else if (0.06 < arr[i][j] and arr[i][j] < 0.07) fmtout("■", RED, WHITE_BG);
-            else if (0.05 < arr[i][j] and arr[i][j] < 0.06) fmtout("≡", RED, WHITE_BG);
-            else if (0.04 < arr[i][j] and arr[i][j] < 0.05) fmtout("=", RED, WHITE_BG);
-            else if (0.03 < arr[i][j] and arr[i][j] < 0.04) fmtout("+", RED, WHITE_BG);
-            else if (0.02 < arr[i][j] and arr[i][j] < 0.03) fmtout("-", RED, WHITE_BG);
-            else if (0.01 < arr[i][j] and arr[i][j] < 0.02) fmtout(":", RED, WHITE_BG);
-            else if (0.001 < arr[i][j] and arr[i][j] < 0.01) fmtout(".", RED, WHITE_BG);
-            else if (-0.01 < arr[i][j] and arr[i][j] < -0.001) fmtout(".", BLUE, WHITE_BG);
-            else if (-0.02 < arr[i][j] and arr[i][j] < -0.01) fmtout(":", BLUE, WHITE_BG);
-            else if (-0.03 < arr[i][j] and arr[i][j] < -0.02) fmtout("-", BLUE, WHITE_BG);
-            else if (-0.04 < arr[i][j] and arr[i][j] < -0.03) fmtout("+", BLUE, WHITE_BG);
-            else if (-0.05 < arr[i][j] and arr[i][j] < -0.04) fmtout("=", BLUE, WHITE_BG);
-            else if (-0.06 < arr[i][j] and arr[i][j] < -0.05) fmtout("≡", BLUE, WHITE_BG);
-            else if (-0.07 < arr[i][j] and arr[i][j] < -0.06) fmtout("■", BLUE, WHITE_BG);
-            else if (arr[i][j] < -0.07) fmtout("█", BLUE, WHITE_BG);
+            else if (arr[i][j] > 0.07 * CONTRAST) fmtout("█", RED, WHITE_BG);
+            else if (0.06 * CONTRAST < arr[i][j] and arr[i][j] < 0.07 * CONTRAST) fmtout("■", RED, WHITE_BG);
+            else if (0.05 * CONTRAST < arr[i][j] and arr[i][j] < 0.06 * CONTRAST) fmtout("≡", RED, WHITE_BG);
+            else if (0.04 * CONTRAST < arr[i][j] and arr[i][j] < 0.05 * CONTRAST) fmtout("=", RED, WHITE_BG);
+            else if (0.03 * CONTRAST < arr[i][j] and arr[i][j] < 0.04 * CONTRAST) fmtout("+", RED, WHITE_BG);
+            else if (0.02 * CONTRAST < arr[i][j] and arr[i][j] < 0.03 * CONTRAST) fmtout("-", RED, WHITE_BG);
+            else if (0.01 * CONTRAST < arr[i][j] and arr[i][j] < 0.02 * CONTRAST) fmtout(":", RED, WHITE_BG);
+            else if (0.001 * CONTRAST < arr[i][j] and arr[i][j] < 0.01 * CONTRAST) fmtout(".", RED, WHITE_BG);
+            else if (-0.01 * CONTRAST < arr[i][j] and arr[i][j] < -0.001 * CONTRAST) fmtout(".", BLUE, WHITE_BG);
+            else if (-0.02 * CONTRAST < arr[i][j] and arr[i][j] < -0.01 * CONTRAST) fmtout(":", BLUE, WHITE_BG);
+            else if (-0.03 * CONTRAST < arr[i][j] and arr[i][j] < -0.02 * CONTRAST) fmtout("-", BLUE, WHITE_BG);
+            else if (-0.04 * CONTRAST < arr[i][j] and arr[i][j] < -0.03 * CONTRAST) fmtout("+", BLUE, WHITE_BG);
+            else if (-0.05 * CONTRAST < arr[i][j] and arr[i][j] < -0.04 * CONTRAST) fmtout("=", BLUE, WHITE_BG);
+            else if (-0.06 * CONTRAST < arr[i][j] and arr[i][j] < -0.05 * CONTRAST) fmtout("≡", BLUE, WHITE_BG);
+            else if (-0.07 * CONTRAST < arr[i][j] and arr[i][j] < -0.06 * CONTRAST) fmtout("■", BLUE, WHITE_BG);
+            else if (arr[i][j] < -0.07 * CONTRAST) fmtout("█", BLUE, WHITE_BG);
             else fmtout("█", WHITE, WHITE_BG);
         }
         std::cout<<std::endl;

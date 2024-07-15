@@ -13,7 +13,7 @@ It is pretty easy to set this program up.
 * First, clone this repository
 `git clone https://github.com/JimZhouZZY/Command-line-LBM.git`.
 
-* Then, compile by a standard C++ compliler, e.g. g++.`g++ main.cpp -o main`.
+* Then, compile by a standard C++ compliler, e.g. clang.`clang main.cpp -o main -std=c++11`.
 
 * Finally, run the program `.\main`.
 

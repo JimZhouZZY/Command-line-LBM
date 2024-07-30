@@ -5,7 +5,7 @@
 
 // Iterations
 constexpr int MAX_ITR = 100000000;
-constexpr int ITR_SHOW_GAP = 250;
+constexpr int ITR_SHOW_GAP = 25;
 
 // Grid Specifications
 constexpr int HEIGHT = 50;
